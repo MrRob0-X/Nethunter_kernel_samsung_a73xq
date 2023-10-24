@@ -197,7 +197,7 @@ img() {
     rgn
     echo -e "\n\e[1;93m[*] Building Kernel! \e[0m"
     BUILD_START=$(date +"%s")
-    time make -j"$PROCS" "${MAKE[@]}" 2>&1 | tee log.txt
+    time make -j"$PROCS" "${MAKE[@]}" CONFIG_SECTION_MISMATCH_WARN_ONLY=y 2>&1 | tee log.txt
     BUILD_END=$(date +"%s")
     DIFF=$((BUILD_END - BUILD_START))
     if [ -f "${KDIR}/out/arch/arm64/boot/Image" ]; then
@@ -230,9 +230,9 @@ mod() {
     rgn
     echo -e "\n\e[1;93m[*] Building Modules! \e[0m"
     mkdir -p "${KDIR}"/out/modules
-    make "${MAKE[@]}" modules_prepare
-    make -j"$PROCS" "${MAKE[@]}" modules INSTALL_MOD_PATH="${KDIR}"/out/modules
-    make "${MAKE[@]}" modules_install INSTALL_MOD_PATH="${KDIR}"/out/modules
+    make "${MAKE[@]}" CONFIG_SECTION_MISMATCH_WARN_ONLY=y modules_prepare
+    make -j"$PROCS" "${MAKE[@]}" CONFIG_SECTION_MISMATCH_WARN_ONLY=y modules INSTALL_MOD_PATH="${KDIR}"/out/modules
+    make "${MAKE[@]}" CONFIG_SECTION_MISMATCH_WARN_ONLY=y modules_install INSTALL_MOD_PATH="${KDIR}"/out/modules
     find "${KDIR}"/out/modules -type f -iname '*.ko' -exec cp {} "${KDIR}"/modules/system/lib/modules/ \;
     cd "${KDIR}"/modules || exit 1
     zip -r9 "${modn}".zip . -x ".git*" -x "README.md" -x "LICENSE" -x "*.zip"
