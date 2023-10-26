@@ -27,9 +27,7 @@ cameratree := $(srctree)/techpack/camera/drivers
 cam_include_dirs := $(shell dirname `find $(cameratree) -name '*.h'` | uniq)
 ccflags-y += $(addprefix -I,$(cam_include_dirs))
 
-ifneq (,$(filter $(CONFIG_MSM_GLOBAL_SYNX), y m))
 ccflags-y += -I$(srctree)/drivers/media/platform/msm/synx
-endif
 
 ccflags-y += -I$(srctree)/techpack/camera/include/uapi/camera
 ccflags-y += -I$(srctree)
@@ -256,8 +254,3 @@ camera-$(CONFIG_SPECTRA_CAMERA) += cam_sensor_module/cam_sensor_utils/cam_sysfs_
 camera-y += camera_main.o
 
 obj-$(CONFIG_SPECTRA_CAMERA) += camera.o
-
-ifeq ($(CONFIG_SPECTRA_CAMERA),m)
-$(info "SPECTRA CAMERA IS BUILT AS DLKM")
-BOARD_VENDOR_KERNEL_MODULES +=  $(KERNEL_MODULES_OUT)/camera.ko
-endif
