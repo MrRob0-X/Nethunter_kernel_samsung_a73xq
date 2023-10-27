@@ -1161,7 +1161,7 @@ void rtl8xxxu_gen1_config_channel(struct ieee80211_hw *hw)
 #endif
 		ht = false;
 #if LINUX_VERSION_CODE > KERNEL_VERSION(5,3,18)
-		fallthrough;
+		// fall through
 #endif
 #if LINUX_VERSION_CODE > KERNEL_VERSION(3,9,11)
 	case NL80211_CHAN_WIDTH_20:
@@ -1315,7 +1315,7 @@ void rtl8xxxu_gen2_config_channel(struct ieee80211_hw *hw)
 #endif
 		ht = false;
 #if LINUX_VERSION_CODE > KERNEL_VERSION(5,3,18)
-		fallthrough;
+		// fall through
 #endif
 #if LINUX_VERSION_CODE > KERNEL_VERSION(3,9,11)
 	case NL80211_CHAN_WIDTH_20:
@@ -1721,7 +1721,7 @@ void rtl8xxxu_config_endpoints_sie(struct rtl8xxxu_priv *priv)
 		priv->ep_tx_high_queue = 1;
 		priv->ep_tx_count++;
 #if LINUX_VERSION_CODE > KERNEL_VERSION(5,3,18)
-		fallthrough;
+		// fall through
 #endif
 	}
 
@@ -1729,7 +1729,7 @@ void rtl8xxxu_config_endpoints_sie(struct rtl8xxxu_priv *priv)
 		priv->ep_tx_normal_queue = 1;
 		priv->ep_tx_count++;
 #if LINUX_VERSION_CODE > KERNEL_VERSION(5,3,18)
-		fallthrough;
+		// fall through
 #endif
 	}
 
@@ -1749,13 +1749,13 @@ int rtl8xxxu_config_endpoints_no_sie(struct rtl8xxxu_priv *priv)
 		priv->ep_tx_low_queue = 1;
 		priv->ep_tx_count++;
 #if LINUX_VERSION_CODE > KERNEL_VERSION(5,3,18)
-		fallthrough;
+		// fall through
 #endif
 	case 2:
 		priv->ep_tx_normal_queue = 1;
 		priv->ep_tx_count++;
 #if LINUX_VERSION_CODE > KERNEL_VERSION(5,3,18)
-		fallthrough;
+		// fall through
 #endif
 	case 1:
 		priv->ep_tx_high_queue = 1;
@@ -6759,7 +6759,7 @@ enum ieee80211_ampdu_mlme_action action, struct ieee80211_sta *sta, u16 tid, u16
 			"Changed HT: ampdu_factor %02x, ampdu_density %02x\n",
 			ampdu_factor, ampdu_density);
 #if LINUX_VERSION_CODE > KERNEL_VERSION(5,4,163)
-		return IEEE80211_AMPDU_TX_START_IMMEDIATE;
+		return IEEE80211_AMPDU_TX_START;
 #else
 		return 1;
 #endif
