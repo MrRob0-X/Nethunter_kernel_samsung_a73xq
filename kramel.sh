@@ -250,6 +250,7 @@ mkzip() {
     fi
     echo -e "\n\e[1;93m[*] Building zip! \e[0m"
     mv "${KDIR}"/out/arch/arm64/boot/Image "${KDIR}"/anykernel3
+    mv "${KDIR}"/out/arch/arm64/boot/dtbo.img "${KDIR}"/anykernel3
     cd "${KDIR}"/anykernel3 || exit 1
     zip -r9 "$zipn".zip . -x ".git*" -x "README.md" -x "LICENSE" -x "*.zip"
     echo -e "\n\e[1;32m[✓] Built zip! \e[0m"
